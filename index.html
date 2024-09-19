@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+       
+        .row{
+            display: flex;
+        }
+        .col{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        @media(max-width:350px){
+            .col{
+                height: 70px;
+                width: 70px;
+            }
+            h1{
+                font-size: 25px;
+            }
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+     <h1>Let's Play Tic Tac Toe!</h1>
+        <div class="container">
+            
+            <div class="grid">
+                <div class="row">
+                    <div onclick="handling(this)" id="0" class="col"></div>
+                    <div onclick="handling(this)" id="1" class="col"></div>
+                    <div onclick="handling(this)" id="2" class="col"></div>
+                </div>
+                <div class="row">
+                    <div onclick="handling(this)" id="3" class="col"></div>
+                    <div onclick="handling(this)" id="4" class="col"></div>
+                    <div onclick="handling(this)" id="5" class="col"></div>
+                </div>
+                <div class="row">
+                    <div onclick="handling(this)" id="6" class="col"></div>
+                    <div onclick="handling(this)" id="7" class="col"></div>
+                    <div onclick="handling(this)" id="8" class="col"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let currentPlayer="X";
+            let arr=Array(9).fill(null);
+            function winner(){
+                if(
+                    (arr[0]!==null && arr[0]==arr[1] && arr[1]==arr[2]) ||
+                    (arr[3]!==null && arr[3]==arr[4] && arr[4]==arr[5]) ||
+                    (arr[6]!==null && arr[6]==arr[7] && arr[7]==arr[8]) ||
+                    (arr[0]!==null && arr[0]==arr[3] && arr[3]==arr[6]) ||
+                    (arr[1]!==null && arr[1]==arr[4] && arr[4]==arr[7]) ||
+                    (arr[2]!==null && arr[2]==arr[5] && arr[5]==arr[8]) ||
+                    (arr[0]!==null && arr[0]==arr[4] && arr[4]==arr[8]) ||
+                    (arr[2]!==null && arr[2]==arr[4] && arr[4]==arr[6]) 
+                ){
+                    document.write(`${currentPlayer} is winner`)
+                }
+                if(!arr.some((e)=> e===null)){
+                    document.write("its draw")
+                }
+                }
+            
+             function handling(el){
+                const index=Number(el.id);
+                if(arr[index]!==null) return
+                arr[index]=currentPlayer
+                el.innerText=currentPlayer;
+                winner();
+                currentPlayer=currentPlayer=="X"?"0":"X";
+            }
+        </script>
+</body>
+</html>
